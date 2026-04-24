@@ -65,6 +65,45 @@ textarea::placeholder {
   padding: 2rem 1.25rem 4rem;
 }
 
+.hero__top {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.language-switcher {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  display: inline-flex;
+  gap: 0.3rem;
+  padding: 0.3rem;
+}
+
+.language-switcher__button {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  box-shadow: none;
+  color: #fff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.86rem;
+  min-width: 3.2rem;
+  padding: 0.55rem 0.8rem;
+}
+
+.language-switcher__button:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.language-switcher__button.is-active {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: #111;
+}
+
 .site-footer {
   align-items: center;
   color: var(--text-soft);
@@ -343,6 +382,11 @@ ul {
   .hero,
   .dashboard-grid {
     grid-template-columns: 1fr;
+  }
+
+  .hero__top {
+    align-items: flex-start;
+    flex-direction: column;
   }
 
   .admin-layout {

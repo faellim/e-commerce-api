@@ -22,14 +22,236 @@ const emptyProduct = {
   category: "",
 };
 
-function currency(value) {
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
+const translations = {
+  pt: {
+    locale: "pt-BR",
     currency: "BRL",
-  }).format(Number(value || 0));
-}
+    languageLabel: "Idioma",
+    languages: { pt: "PT", en: "EN", es: "ES" },
+    defaultStatus: "Conecte a interface ao backend FastAPI e teste os fluxos da aplicação.",
+    eyebrow: "Projeto de Portfólio / Full Stack",
+    heroTitle: "Painel de e-commerce para um fluxo full-stack moderno.",
+    heroText:
+      "Esta interface consome o backend em FastAPI e demonstra o fluxo completo da aplicação: autenticação, catálogo, carrinho, checkout e gestão administrativa de produtos.",
+    badgeApi: "API FastAPI",
+    badgeAuth: "JWT auth",
+    badgeFrontend: "Frontend React",
+    badgeDatabase: "PostgreSQL pronto",
+    metricProducts: "Produtos carregados",
+    metricCart: "Linhas no carrinho",
+    metricOrders: "Meus pedidos",
+    metricProfile: "Perfil atual",
+    apiBaseUrl: "URL base da API",
+    adminShort: "Admin",
+    userShort: "Usuário",
+    statusTitle: "Status do sistema",
+    accessTitle: "Acesso",
+    logout: "Sair",
+    createAccount: "Criar conta",
+    loginTitle: "Entrar",
+    fullNamePlaceholder: "Nome completo",
+    emailPlaceholder: "Email",
+    passwordPlaceholder: "Senha",
+    registerButton: "Cadastrar",
+    loginButton: "Entrar no painel",
+    currentUser: "Usuário atual",
+    loginToUnlock: "Faça login para liberar carrinho, pedidos e ferramentas de admin.",
+    administrator: "Administrador",
+    customer: "Cliente",
+    catalogTitle: "Catálogo",
+    refresh: "Atualizar",
+    generalCategory: "Geral",
+    stockSuffix: "em estoque",
+    addButton: "Adicionar",
+    cartTitle: "Carrinho",
+    cartEmpty: "Seu carrinho está vazio.",
+    remove: "Remover",
+    finishCheckout: "Finalizar compra",
+    ordersTitle: "Pedidos",
+    recordsSuffix: "registros",
+    noOrders: "Nenhum pedido ainda.",
+    totalLabel: "Total",
+    adminZone: "Área admin",
+    enabled: "Ativada",
+    restricted: "Restrita",
+    createProduct: "Criar produto",
+    namePlaceholder: "Nome",
+    descriptionPlaceholder: "Descrição",
+    pricePlaceholder: "Preço",
+    stockPlaceholder: "Estoque",
+    skuPlaceholder: "SKU",
+    categoryPlaceholder: "Categoria",
+    saveProduct: "Salvar produto",
+    allPlatformOrders: "Todos os pedidos da plataforma",
+    loginAdminToInspect: "Faça login como admin para visualizar os pedidos da plataforma.",
+    userIdLabel: "ID do usuário",
+    itemsSuffix: "item(s)",
+    builtBy: "Criado e mantido por",
+    createdSuccessfully: (name) => `${name} foi criado com sucesso. Agora faça login para explorar o sistema.`,
+    authenticatedSuccessfully: "Autenticação concluída com sucesso.",
+    sessionClosed: "Sessão encerrada.",
+    loginAsAdmin: "Faça login como admin antes de criar produtos.",
+    fillRequiredFields: "Preencha nome, descrição, preço, estoque e SKU antes de salvar.",
+    productCreated: "Produto criado com sucesso.",
+    createAccountFirst: "Crie uma conta e faça login para adicionar itens ao carrinho.",
+    itemAdded: "Item adicionado ao carrinho.",
+    itemRemoved: "Item removido do carrinho.",
+    checkoutCompleted: "Checkout concluído com sucesso.",
+  },
+  en: {
+    locale: "en-US",
+    currency: "USD",
+    languageLabel: "Language",
+    languages: { pt: "PT", en: "EN", es: "ES" },
+    defaultStatus: "Connect the interface to the FastAPI backend and test the main application flows.",
+    eyebrow: "Portfolio Project / Full Stack",
+    heroTitle: "E-commerce control room for a modern full-stack workflow.",
+    heroText:
+      "This interface consumes the FastAPI backend and demonstrates the complete application flow: authentication, catalog, cart, checkout, and admin product management.",
+    badgeApi: "FastAPI API",
+    badgeAuth: "JWT auth",
+    badgeFrontend: "React frontend",
+    badgeDatabase: "PostgreSQL ready",
+    metricProducts: "Products loaded",
+    metricCart: "Cart lines",
+    metricOrders: "My orders",
+    metricProfile: "Current profile",
+    apiBaseUrl: "API base URL",
+    adminShort: "Admin",
+    userShort: "User",
+    statusTitle: "System status",
+    accessTitle: "Access",
+    logout: "Logout",
+    createAccount: "Create account",
+    loginTitle: "Login",
+    fullNamePlaceholder: "Full name",
+    emailPlaceholder: "Email",
+    passwordPlaceholder: "Password",
+    registerButton: "Register",
+    loginButton: "Enter dashboard",
+    currentUser: "Current user",
+    loginToUnlock: "Login to unlock cart, orders, and admin tools.",
+    administrator: "Administrator",
+    customer: "Customer",
+    catalogTitle: "Catalog",
+    refresh: "Refresh",
+    generalCategory: "General",
+    stockSuffix: "in stock",
+    addButton: "Add",
+    cartTitle: "Cart",
+    cartEmpty: "Your cart is empty.",
+    remove: "Remove",
+    finishCheckout: "Finish checkout",
+    ordersTitle: "Orders",
+    recordsSuffix: "records",
+    noOrders: "No orders yet.",
+    totalLabel: "Total",
+    adminZone: "Admin area",
+    enabled: "Enabled",
+    restricted: "Restricted",
+    createProduct: "Create product",
+    namePlaceholder: "Name",
+    descriptionPlaceholder: "Description",
+    pricePlaceholder: "Price",
+    stockPlaceholder: "Stock",
+    skuPlaceholder: "SKU",
+    categoryPlaceholder: "Category",
+    saveProduct: "Save product",
+    allPlatformOrders: "All platform orders",
+    loginAdminToInspect: "Login as admin to review platform orders.",
+    userIdLabel: "User ID",
+    itemsSuffix: "item(s)",
+    builtBy: "Built and maintained by",
+    createdSuccessfully: (name) => `${name} was created successfully. Now log in to explore the system.`,
+    authenticatedSuccessfully: "Authenticated successfully.",
+    sessionClosed: "Session closed.",
+    loginAsAdmin: "Login as admin before creating products.",
+    fillRequiredFields: "Fill in name, description, price, stock, and SKU before saving.",
+    productCreated: "Product created successfully.",
+    createAccountFirst: "Create an account and log in to add items to the cart.",
+    itemAdded: "Item added to cart.",
+    itemRemoved: "Item removed from cart.",
+    checkoutCompleted: "Checkout completed successfully.",
+  },
+  es: {
+    locale: "es-ES",
+    currency: "USD",
+    languageLabel: "Idioma",
+    languages: { pt: "PT", en: "EN", es: "ES" },
+    defaultStatus: "Conecta la interfaz al backend en FastAPI y prueba los flujos principales de la aplicación.",
+    eyebrow: "Proyecto de Portafolio / Full Stack",
+    heroTitle: "Panel de e-commerce para un flujo full-stack moderno.",
+    heroText:
+      "Esta interfaz consume el backend en FastAPI y demuestra el flujo completo de la aplicación: autenticación, catálogo, carrito, checkout y administración de productos.",
+    badgeApi: "API FastAPI",
+    badgeAuth: "JWT auth",
+    badgeFrontend: "Frontend React",
+    badgeDatabase: "PostgreSQL listo",
+    metricProducts: "Productos cargados",
+    metricCart: "Líneas del carrito",
+    metricOrders: "Mis pedidos",
+    metricProfile: "Perfil actual",
+    apiBaseUrl: "URL base de la API",
+    adminShort: "Admin",
+    userShort: "Usuario",
+    statusTitle: "Estado del sistema",
+    accessTitle: "Acceso",
+    logout: "Salir",
+    createAccount: "Crear cuenta",
+    loginTitle: "Iniciar sesión",
+    fullNamePlaceholder: "Nombre completo",
+    emailPlaceholder: "Correo electrónico",
+    passwordPlaceholder: "Contraseña",
+    registerButton: "Registrarse",
+    loginButton: "Entrar al panel",
+    currentUser: "Usuario actual",
+    loginToUnlock: "Inicia sesión para habilitar el carrito, los pedidos y las herramientas de admin.",
+    administrator: "Administrador",
+    customer: "Cliente",
+    catalogTitle: "Catálogo",
+    refresh: "Actualizar",
+    generalCategory: "General",
+    stockSuffix: "en stock",
+    addButton: "Agregar",
+    cartTitle: "Carrito",
+    cartEmpty: "Tu carrito está vacío.",
+    remove: "Eliminar",
+    finishCheckout: "Finalizar compra",
+    ordersTitle: "Pedidos",
+    recordsSuffix: "registros",
+    noOrders: "Todavía no hay pedidos.",
+    totalLabel: "Total",
+    adminZone: "Zona admin",
+    enabled: "Activa",
+    restricted: "Restringida",
+    createProduct: "Crear producto",
+    namePlaceholder: "Nombre",
+    descriptionPlaceholder: "Descripción",
+    pricePlaceholder: "Precio",
+    stockPlaceholder: "Stock",
+    skuPlaceholder: "SKU",
+    categoryPlaceholder: "Categoría",
+    saveProduct: "Guardar producto",
+    allPlatformOrders: "Todos los pedidos de la plataforma",
+    loginAdminToInspect: "Inicia sesión como admin para revisar los pedidos de la plataforma.",
+    userIdLabel: "ID del usuario",
+    itemsSuffix: "artículo(s)",
+    builtBy: "Creado y mantenido por",
+    createdSuccessfully: (name) => `${name} fue creado correctamente. Ahora inicia sesión para explorar el sistema.`,
+    authenticatedSuccessfully: "Autenticación completada correctamente.",
+    sessionClosed: "Sesión cerrada.",
+    loginAsAdmin: "Inicia sesión como admin antes de crear productos.",
+    fillRequiredFields: "Completa nombre, descripción, precio, stock y SKU antes de guardar.",
+    productCreated: "Producto creado correctamente.",
+    createAccountFirst: "Crea una cuenta e inicia sesión para agregar artículos al carrito.",
+    itemAdded: "Artículo agregado al carrito.",
+    itemRemoved: "Artículo eliminado del carrito.",
+    checkoutCompleted: "Checkout completado correctamente.",
+  },
+};
 
 function App() {
+  const [language, setLanguage] = useState(() => localStorage.getItem("language") || "pt");
   const [token, setToken] = useState(() => localStorage.getItem("token") || "");
   const [currentUser, setCurrentUser] = useState(null);
   const [products, setProducts] = useState([]);
@@ -39,8 +261,33 @@ function App() {
   const [registerForm, setRegisterForm] = useState(emptyRegister);
   const [loginForm, setLoginForm] = useState(emptyLogin);
   const [productForm, setProductForm] = useState(emptyProduct);
-  const [statusMessage, setStatusMessage] = useState("Connect the app to your FastAPI backend and start testing flows.");
+  const [statusMessage, setStatusMessage] = useState(translations.pt.defaultStatus);
   const [loading, setLoading] = useState(false);
+
+  const copy = translations[language] || translations.pt;
+
+  function updateStatus(message) {
+    setStatusMessage(message);
+  }
+
+  function currency(value) {
+    return new Intl.NumberFormat(copy.locale, {
+      style: "currency",
+      currency: copy.currency,
+    }).format(Number(value || 0));
+  }
+
+  useEffect(() => {
+    localStorage.setItem("language", language);
+    document.documentElement.lang = language;
+    setStatusMessage((current) =>
+      current === translations.pt.defaultStatus ||
+      current === translations.en.defaultStatus ||
+      current === translations.es.defaultStatus
+        ? copy.defaultStatus
+        : current,
+    );
+  }, [language, copy.defaultStatus]);
 
   useEffect(() => {
     if (token) {
@@ -64,7 +311,7 @@ function App() {
       const data = await apiFetch("/api/v1/products");
       setProducts(data);
     } catch (error) {
-      setStatusMessage(error.message);
+      updateStatus(error.message);
     }
   }
 
@@ -87,7 +334,7 @@ function App() {
         setAllOrders([]);
       }
     } catch (error) {
-      setStatusMessage(error.message);
+      updateStatus(error.message);
       setToken("");
     }
   }
@@ -101,12 +348,10 @@ function App() {
         body: JSON.stringify(registerForm),
       });
       setRegisterForm(emptyRegister);
-      setStatusMessage(
-        `${createdUser.full_name} created successfully. Now login to explore the system.`,
-      );
+      updateStatus(copy.createdSuccessfully(createdUser.full_name));
       await loadProducts();
     } catch (error) {
-      setStatusMessage(error.message);
+      updateStatus(error.message);
     } finally {
       setLoading(false);
     }
@@ -119,9 +364,9 @@ function App() {
       const data = await loginRequest(loginForm.email, loginForm.password);
       setToken(data.access_token);
       setLoginForm(emptyLogin);
-      setStatusMessage("Authenticated successfully.");
+      updateStatus(copy.authenticatedSuccessfully);
     } catch (error) {
-      setStatusMessage(error.message);
+      updateStatus(error.message);
     } finally {
       setLoading(false);
     }
@@ -129,13 +374,13 @@ function App() {
 
   function logout() {
     setToken("");
-    setStatusMessage("Session closed.");
+    updateStatus(copy.sessionClosed);
   }
 
   async function handleCreateProduct(event) {
     event.preventDefault();
     if (!token) {
-      setStatusMessage("Login as admin before creating products.");
+      updateStatus(copy.loginAsAdmin);
       return;
     }
 
@@ -146,7 +391,7 @@ function App() {
       !productForm.price ||
       !productForm.stock
     ) {
-      setStatusMessage("Fill in name, description, price, stock and SKU before saving.");
+      updateStatus(copy.fillRequiredFields);
       return;
     }
 
@@ -166,10 +411,10 @@ function App() {
         }),
       });
       setProductForm(emptyProduct);
-      setStatusMessage("Product created.");
+      updateStatus(copy.productCreated);
       await Promise.all([loadProducts(), loadProtectedData(token)]);
     } catch (error) {
-      setStatusMessage(error.message);
+      updateStatus(error.message);
     } finally {
       setLoading(false);
     }
@@ -177,7 +422,7 @@ function App() {
 
   async function addToCart(productId) {
     if (!token) {
-      setStatusMessage("Create an account and login to add items to cart.");
+      updateStatus(copy.createAccountFirst);
       return;
     }
 
@@ -188,10 +433,10 @@ function App() {
         body: JSON.stringify({ product_id: productId, quantity: 1 }),
       });
       setCart(data);
-      setStatusMessage("Item added to cart.");
+      updateStatus(copy.itemAdded);
       await loadProtectedData(token);
     } catch (error) {
-      setStatusMessage(error.message);
+      updateStatus(error.message);
     }
   }
 
@@ -210,7 +455,7 @@ function App() {
       setCart(data);
       await loadProtectedData(token);
     } catch (error) {
-      setStatusMessage(error.message);
+      updateStatus(error.message);
     }
   }
 
@@ -221,10 +466,10 @@ function App() {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCart(data);
-      setStatusMessage("Item removed from cart.");
+      updateStatus(copy.itemRemoved);
       await loadProtectedData(token);
     } catch (error) {
-      setStatusMessage(error.message);
+      updateStatus(error.message);
     }
   }
 
@@ -234,10 +479,10 @@ function App() {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });
-      setStatusMessage("Checkout completed successfully.");
+      updateStatus(copy.checkoutCompleted);
       await Promise.all([loadProducts(), loadProtectedData(token)]);
     } catch (error) {
-      setStatusMessage(error.message);
+      updateStatus(error.message);
     }
   }
 
@@ -245,18 +490,28 @@ function App() {
     <div className="page-shell">
       <header className="hero">
         <div className="hero__copy">
-          <p className="eyebrow">Portfolio Project / Full Stack Showcase</p>
-          <h1>E-commerce control room for a modern full-stack workflow.</h1>
-          <p className="hero__text">
-            This interface sits on top of the FastAPI backend and demonstrates the
-            complete application flow: authentication, catalog, cart, checkout, and
-            admin product management.
-          </p>
+          <div className="hero__top">
+            <p className="eyebrow">{copy.eyebrow}</p>
+            <div className="language-switcher" aria-label={copy.languageLabel}>
+              {Object.entries(copy.languages).map(([code, label]) => (
+                <button
+                  key={code}
+                  type="button"
+                  className={`language-switcher__button ${language === code ? "is-active" : ""}`}
+                  onClick={() => setLanguage(code)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <h1>{copy.heroTitle}</h1>
+          <p className="hero__text">{copy.heroText}</p>
           <div className="hero__badges">
-            <span>FastAPI API</span>
-            <span>JWT auth</span>
-            <span>React frontend</span>
-            <span>PostgreSQL ready</span>
+            <span>{copy.badgeApi}</span>
+            <span>{copy.badgeAuth}</span>
+            <span>{copy.badgeFrontend}</span>
+            <span>{copy.badgeDatabase}</span>
           </div>
         </div>
 
@@ -269,46 +524,48 @@ function App() {
           <div className="metric-grid">
             <article>
               <strong>{products.length}</strong>
-              <span>Products loaded</span>
+              <span>{copy.metricProducts}</span>
             </article>
             <article>
               <strong>{cart.items.length}</strong>
-              <span>Cart lines</span>
+              <span>{copy.metricCart}</span>
             </article>
             <article>
               <strong>{orders.length}</strong>
-              <span>My orders</span>
+              <span>{copy.metricOrders}</span>
             </article>
             <article>
-              <strong>{currentUser?.is_admin ? "Admin" : "User"}</strong>
-              <span>Current profile</span>
+              <strong>{currentUser?.is_admin ? copy.adminShort : copy.userShort}</strong>
+              <span>{copy.metricProfile}</span>
             </article>
           </div>
-          <p className="endpoint">API base URL: {API_BASE_URL}</p>
+          <p className="endpoint">
+            {copy.apiBaseUrl}: {API_BASE_URL}
+          </p>
         </div>
       </header>
 
       <section className="status-banner">
-        <strong>System status</strong>
+        <strong>{copy.statusTitle}</strong>
         <span>{statusMessage}</span>
       </section>
 
       <main className="dashboard-grid">
         <section className="panel">
           <div className="panel__header">
-            <h2>Access</h2>
+            <h2>{copy.accessTitle}</h2>
             {currentUser ? (
               <button className="ghost-button" onClick={logout}>
-                Logout
+                {copy.logout}
               </button>
             ) : null}
           </div>
 
           <div className="stack">
             <form className="form-card" onSubmit={handleRegister}>
-              <h3>Create account</h3>
+              <h3>{copy.createAccount}</h3>
               <input
-                placeholder="Full name"
+                placeholder={copy.fullNamePlaceholder}
                 value={registerForm.full_name}
                 onChange={(event) =>
                   setRegisterForm((current) => ({
@@ -318,7 +575,7 @@ function App() {
                 }
               />
               <input
-                placeholder="Email"
+                placeholder={copy.emailPlaceholder}
                 type="email"
                 value={registerForm.email}
                 onChange={(event) =>
@@ -329,7 +586,7 @@ function App() {
                 }
               />
               <input
-                placeholder="Password"
+                placeholder={copy.passwordPlaceholder}
                 type="password"
                 value={registerForm.password}
                 onChange={(event) =>
@@ -340,14 +597,14 @@ function App() {
                 }
               />
               <button type="submit" disabled={loading}>
-                Register
+                {copy.registerButton}
               </button>
             </form>
 
             <form className="form-card" onSubmit={handleLogin}>
-              <h3>Login</h3>
+              <h3>{copy.loginTitle}</h3>
               <input
-                placeholder="Email"
+                placeholder={copy.emailPlaceholder}
                 type="email"
                 value={loginForm.email}
                 onChange={(event) =>
@@ -358,7 +615,7 @@ function App() {
                 }
               />
               <input
-                placeholder="Password"
+                placeholder={copy.passwordPlaceholder}
                 type="password"
                 value={loginForm.password}
                 onChange={(event) =>
@@ -369,32 +626,32 @@ function App() {
                 }
               />
               <button type="submit" disabled={loading}>
-                Enter dashboard
+                {copy.loginButton}
               </button>
             </form>
           </div>
 
           <div className="profile-card">
-            <h3>Current user</h3>
+            <h3>{copy.currentUser}</h3>
             {currentUser ? (
               <>
                 <p>{currentUser.full_name}</p>
                 <p>{currentUser.email}</p>
                 <span className="pill">
-                  {currentUser.is_admin ? "Administrator" : "Customer"}
+                  {currentUser.is_admin ? copy.administrator : copy.customer}
                 </span>
               </>
             ) : (
-              <p>Login to unlock cart, orders and admin tools.</p>
+              <p>{copy.loginToUnlock}</p>
             )}
           </div>
         </section>
 
         <section className="panel">
           <div className="panel__header">
-            <h2>Catalog</h2>
+            <h2>{copy.catalogTitle}</h2>
             <button className="ghost-button" onClick={loadProducts}>
-              Refresh
+              {copy.refresh}
             </button>
           </div>
           <div className="product-grid">
@@ -402,17 +659,17 @@ function App() {
               <article className="product-card" key={product.id}>
                 <div className="product-card__top">
                   <span className="product-category">
-                    {product.category || "General"}
+                    {product.category || copy.generalCategory}
                   </span>
                   <span className={product.stock > 0 ? "stock stock--ok" : "stock"}>
-                    {product.stock} in stock
+                    {product.stock} {copy.stockSuffix}
                   </span>
                 </div>
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
                 <div className="product-card__bottom">
                   <strong>{currency(product.price)}</strong>
-                  <button onClick={() => addToCart(product.id)}>Add</button>
+                  <button onClick={() => addToCart(product.id)}>{copy.addButton}</button>
                 </div>
               </article>
             ))}
@@ -421,12 +678,12 @@ function App() {
 
         <section className="panel">
           <div className="panel__header">
-            <h2>Cart</h2>
+            <h2>{copy.cartTitle}</h2>
             <strong>{currency(cart.total_amount)}</strong>
           </div>
           <div className="stack">
             {cart.items.length === 0 ? (
-              <p className="empty-state">Your cart is empty.</p>
+              <p className="empty-state">{copy.cartEmpty}</p>
             ) : (
               cart.items.map((item) => (
                 <article className="cart-row" key={item.id}>
@@ -446,26 +703,28 @@ function App() {
                       className="ghost-button"
                       onClick={() => removeCartItem(item.product.id)}
                     >
-                      Remove
+                      {copy.remove}
                     </button>
                   </div>
                 </article>
               ))
             )}
             <button onClick={checkout} disabled={!cart.items.length}>
-              Finish checkout
+              {copy.finishCheckout}
             </button>
           </div>
         </section>
 
         <section className="panel">
           <div className="panel__header">
-            <h2>Orders</h2>
-            <span>{orders.length} records</span>
+            <h2>{copy.ordersTitle}</h2>
+            <span>
+              {orders.length} {copy.recordsSuffix}
+            </span>
           </div>
           <div className="stack">
             {orders.length === 0 ? (
-              <p className="empty-state">No orders yet.</p>
+              <p className="empty-state">{copy.noOrders}</p>
             ) : (
               orders.map((order) => (
                 <article className="order-card" key={order.id}>
@@ -473,7 +732,9 @@ function App() {
                     <strong>Order #{order.id}</strong>
                     <span className="pill">{order.status}</span>
                   </div>
-                  <p>Total: {currency(order.total_amount)}</p>
+                  <p>
+                    {copy.totalLabel}: {currency(order.total_amount)}
+                  </p>
                   <ul>
                     {order.items.map((item) => (
                       <li key={item.id}>
@@ -489,14 +750,14 @@ function App() {
 
         <section className="panel panel--wide">
           <div className="panel__header">
-            <h2>Admin zone</h2>
-            <span>{currentUser?.is_admin ? "Enabled" : "Restricted"}</span>
+            <h2>{copy.adminZone}</h2>
+            <span>{currentUser?.is_admin ? copy.enabled : copy.restricted}</span>
           </div>
           <div className="admin-layout">
             <form className="form-card" onSubmit={handleCreateProduct}>
-              <h3>Create product</h3>
+              <h3>{copy.createProduct}</h3>
               <input
-                placeholder="Name"
+                placeholder={copy.namePlaceholder}
                 value={productForm.name}
                 onChange={(event) =>
                   setProductForm((current) => ({
@@ -506,7 +767,7 @@ function App() {
                 }
               />
               <textarea
-                placeholder="Description"
+                placeholder={copy.descriptionPlaceholder}
                 rows="4"
                 value={productForm.description}
                 onChange={(event) =>
@@ -518,7 +779,7 @@ function App() {
               />
               <div className="two-columns">
                 <input
-                  placeholder="Price"
+                  placeholder={copy.pricePlaceholder}
                   type="number"
                   step="0.01"
                   value={productForm.price}
@@ -530,7 +791,7 @@ function App() {
                   }
                 />
                 <input
-                  placeholder="Stock"
+                  placeholder={copy.stockPlaceholder}
                   type="number"
                   value={productForm.stock}
                   onChange={(event) =>
@@ -543,7 +804,7 @@ function App() {
               </div>
               <div className="two-columns">
                 <input
-                  placeholder="SKU"
+                  placeholder={copy.skuPlaceholder}
                   value={productForm.sku}
                   onChange={(event) =>
                     setProductForm((current) => ({
@@ -553,7 +814,7 @@ function App() {
                   }
                 />
                 <input
-                  placeholder="Category"
+                  placeholder={copy.categoryPlaceholder}
                   value={productForm.category}
                   onChange={(event) =>
                     setProductForm((current) => ({
@@ -564,16 +825,14 @@ function App() {
                 />
               </div>
               <button type="submit" disabled={!currentUser?.is_admin || loading}>
-                Save product
+                {copy.saveProduct}
               </button>
             </form>
 
             <div className="admin-orders">
-              <h3>All platform orders</h3>
+              <h3>{copy.allPlatformOrders}</h3>
               {allOrders.length === 0 ? (
-                <p className="empty-state">
-                  Login as admin to inspect platform orders.
-                </p>
+                <p className="empty-state">{copy.loginAdminToInspect}</p>
               ) : (
                 allOrders.map((order) => (
                   <article className="order-card" key={order.id}>
@@ -581,8 +840,12 @@ function App() {
                       <strong>Order #{order.id}</strong>
                       <span>{currency(order.total_amount)}</span>
                     </div>
-                    <p>User ID: {order.user_id}</p>
-                    <p>{order.items.length} item(s)</p>
+                    <p>
+                      {copy.userIdLabel}: {order.user_id}
+                    </p>
+                    <p>
+                      {order.items.length} {copy.itemsSuffix}
+                    </p>
                   </article>
                 ))
               )}
@@ -592,8 +855,8 @@ function App() {
       </main>
 
       <footer className="site-footer">
-        <span className="site-footer__label">Built and maintained by</span>
-        <strong>faellim</strong>
+        <span className="site-footer__label">{copy.builtBy}</span>
+        <strong>codedbyfaellim</strong>
       </footer>
     </div>
   );
