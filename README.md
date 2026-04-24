@@ -4,6 +4,7 @@
 ![React](https://img.shields.io/badge/React-Frontend-blue)
 ![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
 ![CI](https://img.shields.io/badge/CI-GitHub%20Actions-success)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 ![System demo](assets/demo/ecommerce-demo.gif)
 
