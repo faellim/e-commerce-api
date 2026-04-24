@@ -13,3 +13,5 @@ frontend/dist/
 .codex-runtime/
 ecommerce_local.db
 frontend/.env
+.demo-tools/
+assets/demo/frames/

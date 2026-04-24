@@ -1,5 +1,9 @@
 # E-commerce API
 
+## Demo
+
+![Demo do sistema](assets/demo/ecommerce-demo.gif)
+
 Backend de e-commerce construído com Python e FastAPI para portfólio. O projeto inclui autenticação JWT, gerenciamento de produtos, carrinho de compras, criação de pedidos, controle de estoque e integração com PostgreSQL.
 
 ## Destaques
@@ -258,3 +262,4 @@ Esse projeto mostra fundamentos muito valorizados em estágio e vagas júnior:
 - uso de Docker e variáveis de ambiente
 - testes automatizados e CI
 - preparo para deploy em produção
+
