@@ -7,7 +7,7 @@
 
 ![System demo](assets/demo/ecommerce-demo.gif)
 
-**Full-stack e-commerce system built with FastAPI, PostgreSQL, and React.**
+**Full-stack e-commerce system built with Python, FastAPI, PostgreSQL, and React.**
 Includes authentication, product management, cart, checkout flow, stock control, automated tests, and CI/CD.
 
 ---
