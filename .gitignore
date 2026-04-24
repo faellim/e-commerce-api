@@ -1,0 +1,15 @@
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+dist/
+build/
+node_modules/
+frontend/node_modules/
+frontend/dist/
+.codex-runtime/
+ecommerce_local.db
+frontend/.env
