@@ -31,6 +31,7 @@ Includes authentication, product management, cart, checkout flow, stock control,
 * 🧪 Automated tests with `pytest`
 * 🚀 CI pipeline with GitHub Actions
 * 🐳 Dockerized for local and production environments
+* 🌎 Multi-language support (Portuguese, English, Spanish)
 
 ---
 
