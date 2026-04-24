@@ -246,11 +246,11 @@ function App() {
       <header className="hero">
         <div className="hero__copy">
           <p className="eyebrow">Portfolio Project / Full Stack Showcase</p>
-          <h1>E-commerce control room for recruiters and technical interviews.</h1>
+          <h1>E-commerce control room for a modern full-stack workflow.</h1>
           <p className="hero__text">
-            This frontend sits on top of your FastAPI backend and demonstrates the
-            end-to-end flow: authentication, catalog, cart, checkout and admin product
-            management.
+            This interface sits on top of the FastAPI backend and demonstrates the
+            complete application flow: authentication, catalog, cart, checkout, and
+            admin product management.
           </p>
           <div className="hero__badges">
             <span>FastAPI API</span>
@@ -590,6 +590,11 @@ function App() {
           </div>
         </section>
       </main>
+
+      <footer className="site-footer">
+        <span className="site-footer__label">Built and maintained by</span>
+        <strong>codedbyfaellim</strong>
+      </footer>
     </div>
   );
 }
