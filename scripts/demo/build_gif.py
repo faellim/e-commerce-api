@@ -19,10 +19,8 @@ STEP_TITLES = {
     "11-checkout-complete.png": "11. Checkout completed",
 }
 
-FRAME_DURATION_MS = 1700
-FINAL_FRAME_DURATION_MS = 2400
-TRANSITION_STEPS = 3
-TRANSITION_DURATION_MS = 180
+FRAME_DURATION_MS = 2200
+FINAL_FRAME_DURATION_MS = 3000
 
 
 def load_font(size: int) -> ImageFont.ImageFont:
@@ -75,20 +73,6 @@ def main() -> None:
         frames.append(frame)
         durations.append(FINAL_FRAME_DURATION_MS if index == len(base_frames) - 1 else FRAME_DURATION_MS)
 
-        if index == len(base_frames) - 1:
-            continue
-
-        next_frame = base_frames[index + 1].convert("RGBA")
-        current_rgba = frame.convert("RGBA")
-        for step in range(1, TRANSITION_STEPS + 1):
-            blend = Image.blend(
-                current_rgba,
-                next_frame,
-                step / (TRANSITION_STEPS + 1),
-            )
-            frames.append(blend.convert("P", palette=Image.ADAPTIVE))
-            durations.append(TRANSITION_DURATION_MS)
-
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     frames[0].save(
         OUTPUT_PATH,
@@ -97,7 +81,6 @@ def main() -> None:
         duration=durations,
         loop=0,
         optimize=False,
-        disposal=2,
     )
 
 
