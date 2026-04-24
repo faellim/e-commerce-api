@@ -2,25 +2,39 @@
 
 ## Demo
 
-![Demo do sistema](assets/demo/ecommerce-demo.gif)
+![System demo](assets/demo/ecommerce-demo.gif)
 
-Backend de e-commerce construído com Python e FastAPI para portfólio. O projeto inclui autenticação JWT, gerenciamento de produtos, carrinho de compras, criação de pedidos, controle de estoque e integração com PostgreSQL.
+Full-stack e-commerce project built with FastAPI, PostgreSQL, React, and Vite. It includes JWT authentication, product management, shopping cart, checkout flow, stock control, automated tests, CI, and deployment-ready configuration.
 
-## Destaques
+## Live Links
 
-- FastAPI com documentação automática em `/docs`
-- Autenticação JWT com login e cadastro
-- Controle de acesso com usuário administrador
-- CRUD de produtos
-- Carrinho por usuário com atualização de quantidades
-- Checkout com baixa automática no estoque
-- PostgreSQL com SQLAlchemy
-- Docker Compose para subir a API e o banco
-- Testes automatizados com pytest
-- Pipeline de CI com GitHub Actions
-- Blueprint de deploy no Render
+- Frontend: [https://e-commerce-api-beta-eight.vercel.app](https://e-commerce-api-beta-eight.vercel.app)
+- Backend API: [https://ecommerce-api-z4q0.onrender.com](https://ecommerce-api-z4q0.onrender.com)
+- Swagger Docs: [https://ecommerce-api-z4q0.onrender.com/docs](https://ecommerce-api-z4q0.onrender.com/docs)
 
-## Estrutura
+## Features
+
+- JWT authentication with register, login, and current-user endpoints
+- Role-based access with admin-only product management
+- Product catalog with search support
+- Shopping cart per user
+- Checkout flow with automatic stock reduction
+- Order history for customers
+- Order listing for admins
+- React frontend connected to the API
+- Automated tests with `pytest`
+- GitHub Actions CI pipeline
+- Deployment setup for Render and Vercel
+
+## Tech Stack
+
+- Backend: Python, FastAPI, SQLAlchemy, Pydantic Settings, Passlib, Python-JOSE
+- Database: PostgreSQL
+- Frontend: React, Vite
+- Testing: Pytest, HTTPX
+- DevOps: Docker, Docker Compose, GitHub Actions, Render, Vercel
+
+## Project Structure
 
 ```text
 app/
@@ -30,188 +44,11 @@ app/
   schemas/
 frontend/
 tests/
+assets/demo/
+scripts/demo/
 ```
 
-## Tecnologias
-
-- Python
-- FastAPI
-- SQLAlchemy
-- PostgreSQL
-- Pydantic Settings
-- Passlib
-- Python-JOSE
-- Docker
-
-## Como executar
-
-1. Crie um ambiente virtual e instale as dependências:
-
-```bash
-pip install -r requirements.txt
-```
-
-2. Copie o arquivo de ambiente:
-
-```bash
-Copy-Item .env.example .env
-```
-
-3. Suba os serviços:
-
-```bash
-docker compose up --build
-```
-
-4. Acesse:
-
-- API: `http://localhost:8000`
-- Swagger: `http://localhost:8000/docs`
-- Healthcheck: `http://localhost:8000/health`
-
-## Frontend web
-
-O projeto agora inclui uma interface em React dentro de `frontend/`, pronta para conectar na API.
-
-### Rodando o frontend
-
-1. Entre na pasta:
-
-```bash
-cd frontend
-```
-
-2. Copie o ambiente:
-
-```bash
-Copy-Item .env.example .env
-```
-
-3. Instale as dependências:
-
-```bash
-npm install
-```
-
-4. Rode o projeto:
-
-```bash
-npm run dev
-```
-
-5. Acesse:
-
-- Frontend: `http://localhost:5173`
-
-### O que essa interface demonstra
-
-- cadastro e login
-- catálogo de produtos
-- carrinho com atualização de quantidade
-- checkout
-- visualização de pedidos
-- área admin para cadastrar produtos
-
-## Como testar
-
-### Teste manual
-
-Depois de subir o projeto com Docker, abra o Swagger em `http://localhost:8000/docs` e siga este fluxo:
-
-1. Crie o primeiro usuário em `POST /api/v1/auth/register`
-2. Faça login em `POST /api/v1/auth/login`
-3. Clique em `Authorize` no Swagger e cole o token
-4. Cadastre produtos como admin
-5. Crie um segundo usuário
-6. Adicione itens ao carrinho
-7. Finalize em `POST /api/v1/orders/checkout`
-
-### Teste automatizado
-
-Se você tiver Python instalado localmente:
-
-```bash
-pip install -r requirements.txt
-pytest
-```
-
-Os testes cobrem:
-
-- healthcheck
-- cadastro e login
-- checkout com redução de estoque
-
-## Deploy online
-
-### Opção recomendada: Render
-
-Esse repositório já inclui `render.yaml`, então você pode:
-
-1. Subir o projeto no GitHub
-2. Criar conta no [Render](https://render.com)
-3. Escolher a opção de blueprint deploy
-4. Selecionar o repositório
-5. Deixar o Render criar a API e o PostgreSQL automaticamente
-
-Depois disso, sua documentação vai ficar disponível em algo como:
-
-- `https://seu-app.onrender.com/docs`
-- `https://seu-app.onrender.com/health`
-
-### Deploy do banco
-
-O `render.yaml` já cria:
-
-- um serviço web para a API
-- um banco PostgreSQL gerenciado
-
-### Deploy do frontend
-
-Para o frontend, a opção mais simples é:
-
-- `Vercel`
-- `Netlify`
-
-Defina a variável:
-
-```env
-VITE_API_BASE_URL=https://seu-backend.onrender.com
-```
-
-Se quiser usar GitHub Pages depois, também dá, mas Vercel e Netlify costumam ser mais simples para projetos React com Vite.
-
-### Passo a passo recomendado
-
-1. Publique este repositório no GitHub
-2. Faça o deploy do backend no Render usando o `render.yaml`
-3. Copie a URL pública do backend
-4. No Vercel, importe a pasta `frontend/` como projeto
-5. Configure a variável `VITE_API_BASE_URL` com a URL do backend do Render
-6. Faça o deploy do frontend
-7. Se quiser CORS mais restrito, troque `BACKEND_CORS_ORIGINS` no Render para algo como `["https://seu-frontend.vercel.app"]`
-
-## CI no GitHub
-
-O projeto inclui GitHub Actions em `.github/workflows/ci.yml`. Sempre que você fizer push ou abrir um pull request, os testes serão executados automaticamente.
-
-## Fluxo de demonstração
-
-1. Cadastre o primeiro usuário. Ele será criado como administrador para facilitar a apresentação do projeto.
-2. Faça login e copie o token JWT no Swagger.
-3. Crie alguns produtos.
-4. Cadastre um segundo usuário comum.
-5. Adicione itens ao carrinho.
-6. Finalize o checkout e verifique a redução do estoque.
-
-## Variáveis de ambiente
-
-Veja o arquivo `.env.example` para a configuração completa. A variável principal é:
-
-```env
-DATABASE_URL=postgresql://postgres:postgres@db:5432/ecommerce_db
-```
-
-## Endpoints principais
+## API Overview
 
 ### Auth
 
@@ -219,7 +56,7 @@ DATABASE_URL=postgresql://postgres:postgres@db:5432/ecommerce_db
 - `POST /api/v1/auth/login`
 - `GET /api/v1/auth/me`
 
-### Produtos
+### Products
 
 - `GET /api/v1/products`
 - `GET /api/v1/products/{product_id}`
@@ -227,39 +64,174 @@ DATABASE_URL=postgresql://postgres:postgres@db:5432/ecommerce_db
 - `PUT /api/v1/products/{product_id}`
 - `DELETE /api/v1/products/{product_id}`
 
-### Carrinho
+### Cart
 
 - `GET /api/v1/cart`
 - `POST /api/v1/cart/items`
 - `PUT /api/v1/cart/items/{product_id}`
 - `DELETE /api/v1/cart/items/{product_id}`
 
-### Pedidos
+### Orders
 
 - `POST /api/v1/orders/checkout`
 - `GET /api/v1/orders/mine`
 - `GET /api/v1/orders/{order_id}`
 - `GET /api/v1/orders`
 
-## Ideias para evoluir
+## Business Rules
 
-- Paginação e filtros avançados
-- Upload de imagens de produtos
-- Integração com gateway de pagamento
-- Testes automatizados
-- Alembic para migrations
-- Deploy em Render, Railway ou AWS
+- The first registered user becomes `admin`
+- Only admins can create, update, and delete products
+- Products require a unique `sku`
+- Checkout fails if stock is insufficient
+- Successful checkout creates an order and reduces product stock
 
-## Valor para portfólio
+## Running Locally
 
-Esse projeto mostra fundamentos muito valorizados em estágio e vagas júnior:
+### Backend
 
-- modelagem de API REST
-- autenticação e autorização
-- regras de negócio reais
-- integração com banco relacional
-- organização de projeto backend
-- uso de Docker e variáveis de ambiente
-- testes automatizados e CI
-- preparo para deploy em produção
+1. Install dependencies:
 
+```powershell
+pip install -r requirements.txt
+```
+
+2. Copy the environment file:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+3. Start with Docker:
+
+```powershell
+docker compose up --build
+```
+
+4. Open:
+
+- API: `http://localhost:8000`
+- Swagger: `http://localhost:8000/docs`
+- Healthcheck: `http://localhost:8000/health`
+
+### Frontend
+
+1. Move to the frontend folder:
+
+```powershell
+cd frontend
+```
+
+2. Copy the environment file:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+3. Install dependencies:
+
+```powershell
+npm.cmd install
+```
+
+4. Start the dev server:
+
+```powershell
+npm.cmd run dev
+```
+
+5. Open:
+
+- Frontend: `http://localhost:5173`
+
+## Testing
+
+Run backend tests:
+
+```powershell
+pytest
+```
+
+Current automated coverage includes:
+
+- healthcheck
+- register and login flow
+- checkout with stock reduction
+
+Build the frontend:
+
+```powershell
+cd frontend
+npm.cmd run build
+```
+
+## Deployment
+
+### Backend on Render
+
+This repository includes a `render.yaml` blueprint that provisions:
+
+- one web service for the FastAPI backend
+- one managed PostgreSQL database
+
+### Frontend on Vercel
+
+The frontend lives in `frontend/` and is ready to deploy on Vercel.
+
+Required environment variable:
+
+```env
+VITE_API_BASE_URL=https://your-backend.onrender.com
+```
+
+If you want to restrict CORS in production, set this on Render:
+
+```env
+BACKEND_CORS_ORIGINS=["https://your-frontend.vercel.app"]
+```
+
+## Environment Variables
+
+Example backend configuration:
+
+```env
+APP_NAME=E-commerce API
+APP_VERSION=1.0.0
+DEBUG=true
+ENVIRONMENT=development
+SECRET_KEY=change-this-secret-key
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=60
+BACKEND_CORS_ORIGINS=["*"]
+DATABASE_URL=postgresql://postgres:postgres@db:5432/ecommerce_db
+```
+
+Frontend example:
+
+```env
+VITE_API_BASE_URL=http://localhost:8000
+```
+
+## Demo Flow
+
+1. Register the first user to create an admin account
+2. Login as admin
+3. Create one or more products
+4. Register a customer account
+5. Add a product to cart
+6. Complete checkout
+7. Review created orders
+
+## Possible Improvements
+
+- Pagination and advanced filters
+- Product image upload
+- Alembic migrations
+- Payment gateway integration
+- More test coverage
+- Admin dashboard analytics
+
+## Repository Notes
+
+- Demo GIF is stored in `assets/demo/ecommerce-demo.gif`
+- Capture scripts used to generate the demo are stored in `scripts/demo/`
