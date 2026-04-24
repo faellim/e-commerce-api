@@ -1,42 +1,78 @@
-# E-commerce API
-
-## Demo
+# 🛒 E-commerce Full-Stack API
 
 ![System demo](assets/demo/ecommerce-demo.gif)
 
-Full-stack e-commerce project built with FastAPI, PostgreSQL, React, and Vite. It includes JWT authentication, product management, shopping cart, checkout flow, stock control, automated tests, CI, and deployment-ready configuration.
+**Full-stack e-commerce system built with FastAPI, PostgreSQL, and React.**
+Includes authentication, product management, cart, checkout flow, stock control, automated tests, and CI/CD.
 
-## Live Links
+---
 
-- Frontend: [https://e-commerce-api-beta-eight.vercel.app](https://e-commerce-api-beta-eight.vercel.app)
-- Backend API: [https://ecommerce-api-z4q0.onrender.com](https://ecommerce-api-z4q0.onrender.com)
-- Swagger Docs: [https://ecommerce-api-z4q0.onrender.com/docs](https://ecommerce-api-z4q0.onrender.com/docs)
+## 🌐 Live Demo
 
-## Features
+* 🔗 Frontend: [https://e-commerce-api-beta-eight.vercel.app](https://e-commerce-api-beta-eight.vercel.app)
+* 🔗 Backend API: [https://ecommerce-api-z4q0.onrender.com](https://ecommerce-api-z4q0.onrender.com)
+* 📄 Swagger Docs: [https://ecommerce-api-z4q0.onrender.com/docs](https://ecommerce-api-z4q0.onrender.com/docs)
 
-- JWT authentication with register, login, and current-user endpoints
-- Role-based access with admin-only product management
-- Product catalog with search support
-- Shopping cart per user
-- Checkout flow with automatic stock reduction
-- Order history for customers
-- Order listing for admins
-- React frontend connected to the API
-- Automated tests with `pytest`
-- GitHub Actions CI pipeline
-- Deployment setup for Render and Vercel
+---
 
-## Tech Stack
+## ⚡ Highlights
 
-- Backend: Python, FastAPI, SQLAlchemy, Pydantic Settings, Passlib, Python-JOSE
-- Database: PostgreSQL
-- Frontend: React, Vite
-- Testing: Pytest, HTTPX
-- DevOps: Docker, Docker Compose, GitHub Actions, Render, Vercel
+* 🔐 JWT Authentication (register, login, current user)
+* 🛍️ Product catalog with admin management
+* 🛒 Shopping cart per user
+* 💳 Checkout flow with stock validation
+* 📦 Order history (user + admin views)
+* ⚙️ Full-stack integration (React + FastAPI)
+* 🧪 Automated tests with `pytest`
+* 🚀 CI pipeline with GitHub Actions
+* 🐳 Dockerized for local and production environments
 
-## Project Structure
+---
 
-```text
+## 🧠 What I Built & Learned
+
+* Designed a REST API using **FastAPI + SQLAlchemy**
+* Implemented **JWT authentication and role-based access**
+* Built a complete **e-commerce flow (cart → checkout → orders)**
+* Integrated frontend with backend using **React + Vite**
+* Set up **Docker + CI/CD pipeline**
+* Structured a scalable project using clean architecture principles
+
+---
+
+## 🏗️ Tech Stack
+
+**Backend**
+
+* Python
+* FastAPI
+* SQLAlchemy
+* Pydantic
+* Passlib / JWT
+
+**Frontend**
+
+* React
+* Vite
+
+**Database**
+
+* PostgreSQL
+
+**Testing & DevOps**
+
+* Pytest
+* HTTPX
+* Docker / Docker Compose
+* GitHub Actions
+* Render (backend)
+* Vercel (frontend)
+
+---
+
+## 📁 Project Structure
+
+```bash
 app/
   api/
   core/
@@ -48,190 +84,156 @@ assets/demo/
 scripts/demo/
 ```
 
-## API Overview
+---
+
+## 🔌 API Overview
 
 ### Auth
 
-- `POST /api/v1/auth/register`
-- `POST /api/v1/auth/login`
-- `GET /api/v1/auth/me`
+* `POST /api/v1/auth/register`
+* `POST /api/v1/auth/login`
+* `GET /api/v1/auth/me`
 
 ### Products
 
-- `GET /api/v1/products`
-- `GET /api/v1/products/{product_id}`
-- `POST /api/v1/products`
-- `PUT /api/v1/products/{product_id}`
-- `DELETE /api/v1/products/{product_id}`
+* `GET /api/v1/products`
+* `GET /api/v1/products/{id}`
+* `POST /api/v1/products` (admin)
+* `PUT /api/v1/products/{id}` (admin)
+* `DELETE /api/v1/products/{id}` (admin)
 
 ### Cart
 
-- `GET /api/v1/cart`
-- `POST /api/v1/cart/items`
-- `PUT /api/v1/cart/items/{product_id}`
-- `DELETE /api/v1/cart/items/{product_id}`
+* `GET /api/v1/cart`
+* `POST /api/v1/cart/items`
+* `PUT /api/v1/cart/items/{product_id}`
+* `DELETE /api/v1/cart/items/{product_id}`
 
 ### Orders
 
-- `POST /api/v1/orders/checkout`
-- `GET /api/v1/orders/mine`
-- `GET /api/v1/orders/{order_id}`
-- `GET /api/v1/orders`
+* `POST /api/v1/orders/checkout`
+* `GET /api/v1/orders/mine`
+* `GET /api/v1/orders/{id}`
+* `GET /api/v1/orders` (admin)
 
-## Business Rules
+---
 
-- The first registered user becomes `admin`
-- Only admins can create, update, and delete products
-- Products require a unique `sku`
-- Checkout fails if stock is insufficient
-- Successful checkout creates an order and reduces product stock
+## 📌 Business Rules
 
-## Running Locally
+* First registered user becomes **admin**
+* Only admins can manage products
+* Products require a unique **SKU**
+* Checkout fails if stock is insufficient
+* Successful checkout:
+
+  * creates an order
+  * reduces product stock
+
+---
+
+## 🧪 Running Locally
 
 ### Backend
 
-1. Install dependencies:
-
-```powershell
+```bash
 pip install -r requirements.txt
-```
-
-2. Copy the environment file:
-
-```powershell
-Copy-Item .env.example .env
-```
-
-3. Start with Docker:
-
-```powershell
+cp .env.example .env
 docker compose up --build
 ```
 
-4. Open:
+Open:
 
-- API: `http://localhost:8000`
-- Swagger: `http://localhost:8000/docs`
-- Healthcheck: `http://localhost:8000/health`
+* [http://localhost:8000](http://localhost:8000)
+* [http://localhost:8000/docs](http://localhost:8000/docs)
+
+---
 
 ### Frontend
 
-1. Move to the frontend folder:
-
-```powershell
+```bash
 cd frontend
+cp .env.example .env
+npm install
+npm run dev
 ```
 
-2. Copy the environment file:
+Open:
 
-```powershell
-Copy-Item .env.example .env
-```
+* [http://localhost:5173](http://localhost:5173)
 
-3. Install dependencies:
+---
 
-```powershell
-npm.cmd install
-```
+## ✅ Testing
 
-4. Start the dev server:
-
-```powershell
-npm.cmd run dev
-```
-
-5. Open:
-
-- Frontend: `http://localhost:5173`
-
-## Testing
-
-Run backend tests:
-
-```powershell
+```bash
 pytest
 ```
 
-Current automated coverage includes:
+Coverage includes:
 
-- healthcheck
-- register and login flow
-- checkout with stock reduction
+* auth flow
+* checkout logic
+* stock validation
 
-Build the frontend:
+---
 
-```powershell
-cd frontend
-npm.cmd run build
-```
+## 🚀 Deployment
 
-## Deployment
+### Backend (Render)
 
-### Backend on Render
+* Uses `render.yaml` blueprint
+* Includes PostgreSQL provisioning
 
-This repository includes a `render.yaml` blueprint that provisions:
-
-- one web service for the FastAPI backend
-- one managed PostgreSQL database
-
-### Frontend on Vercel
-
-The frontend lives in `frontend/` and is ready to deploy on Vercel.
-
-Required environment variable:
+### Frontend (Vercel)
 
 ```env
 VITE_API_BASE_URL=https://your-backend.onrender.com
 ```
 
-If you want to restrict CORS in production, set this on Render:
+---
+
+## ⚙️ Environment Variables
+
+Backend example:
 
 ```env
-BACKEND_CORS_ORIGINS=["https://your-frontend.vercel.app"]
-```
-
-## Environment Variables
-
-Example backend configuration:
-
-```env
-APP_NAME=E-commerce API
-APP_VERSION=1.0.0
-DEBUG=true
-ENVIRONMENT=development
-SECRET_KEY=change-this-secret-key
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=60
+SECRET_KEY=your-secret
+DATABASE_URL=postgresql://...
 BACKEND_CORS_ORIGINS=["*"]
-DATABASE_URL=postgresql://postgres:postgres@db:5432/ecommerce_db
 ```
 
-Frontend example:
+Frontend:
 
 ```env
 VITE_API_BASE_URL=http://localhost:8000
 ```
 
-## Demo Flow
+---
 
-1. Register the first user to create an admin account
-2. Login as admin
-3. Create one or more products
-4. Register a customer account
-5. Add a product to cart
-6. Complete checkout
-7. Review created orders
+## 🎯 Demo Flow
 
-## Possible Improvements
+1. Register first user (admin)
+2. Create products
+3. Register a normal user
+4. Add items to cart
+5. Checkout
+6. View orders
 
-- Pagination and advanced filters
-- Product image upload
-- Alembic migrations
-- Payment gateway integration
-- More test coverage
-- Admin dashboard analytics
+---
 
-## Repository Notes
+## 🔮 Future Improvements
 
-- Demo GIF is stored in `assets/demo/ecommerce-demo.gif`
-- Capture scripts used to generate the demo are stored in `scripts/demo/`
+* Pagination & filtering
+* Product images
+* Alembic migrations
+* Payment integration
+* Admin analytics dashboard
+* More test coverage
+
+---
+
+## 👨‍💻 Author
+
+Developed by **@faellim**
+
+---
