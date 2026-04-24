@@ -55,12 +55,13 @@ async function parseResponse(response) {
 }
 
 export async function apiFetch(path, options = {}) {
+  const { headers, ...restOptions } = options;
   const response = await fetch(buildUrl(path), {
     headers: {
       "Content-Type": "application/json",
-      ...(options.headers || {}),
+      ...(headers || {}),
     },
-    ...options,
+    ...restOptions,
   });
 
   return parseResponse(response);
