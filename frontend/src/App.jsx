@@ -593,7 +593,7 @@ function App() {
 
       <footer className="site-footer">
         <span className="site-footer__label">Built and maintained by</span>
-        <strong>codedbyfaellim</strong>
+        <strong>faellim</strong>
       </footer>
     </div>
   );
