@@ -1,4 +1,9 @@
 # 🛒 E-commerce Full-Stack API
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-API-green)
+![React](https://img.shields.io/badge/React-Frontend-blue)
+![Docker](https://img.shields.io/badge/Docker-Containerized-blue)
+![CI](https://img.shields.io/badge/CI-GitHub%20Actions-success)
 
 ![System demo](assets/demo/ecommerce-demo.gif)
 
