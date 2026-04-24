@@ -139,6 +139,17 @@ function App() {
       return;
     }
 
+    if (
+      !productForm.name.trim() ||
+      !productForm.description.trim() ||
+      !productForm.sku.trim() ||
+      !productForm.price ||
+      !productForm.stock
+    ) {
+      setStatusMessage("Fill in name, description, price, stock and SKU before saving.");
+      return;
+    }
+
     setLoading(true);
     try {
       await apiFetch("/api/v1/products", {
@@ -146,6 +157,10 @@ function App() {
         headers: { Authorization: `Bearer ${token}` },
         body: JSON.stringify({
           ...productForm,
+          name: productForm.name.trim(),
+          description: productForm.description.trim(),
+          sku: productForm.sku.trim(),
+          category: productForm.category.trim() || null,
           price: Number(productForm.price),
           stock: Number(productForm.stock),
         }),

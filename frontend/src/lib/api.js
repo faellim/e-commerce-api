@@ -7,6 +7,36 @@ function buildUrl(path) {
   return `${API_BASE_URL}${path}`;
 }
 
+function formatErrorDetail(detail) {
+  if (typeof detail === "string") {
+    return detail;
+  }
+
+  if (Array.isArray(detail)) {
+    return detail
+      .map((item) => {
+        if (typeof item === "string") {
+          return item;
+        }
+
+        if (item && typeof item === "object") {
+          const location = Array.isArray(item.loc) ? item.loc.join(" > ") : "field";
+          const message = item.msg || "Invalid value";
+          return `${location}: ${message}`;
+        }
+
+        return "Request failed";
+      })
+      .join(" | ");
+  }
+
+  if (detail && typeof detail === "object") {
+    return detail.message || JSON.stringify(detail);
+  }
+
+  return "Request failed";
+}
+
 async function parseResponse(response) {
   const contentType = response.headers.get("content-type") || "";
   const data = contentType.includes("application/json")
@@ -16,7 +46,7 @@ async function parseResponse(response) {
   if (!response.ok) {
     const detail =
       typeof data === "object" && data !== null && "detail" in data
-        ? data.detail
+        ? formatErrorDetail(data.detail)
         : "Request failed";
     throw new Error(detail);
   }
