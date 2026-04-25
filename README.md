@@ -127,7 +127,7 @@ scripts/demo/
 
 ## 📌 Business Rules
 
-* First registered user becomes **admin**
+* Initial admin bootstrap strategy for development/demo purposes
 * Only admins can manage products
 * Products require a unique **SKU**
 * Checkout fails if stock is insufficient
