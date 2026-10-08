@@ -1,4 +1,5 @@
 # 🛒 E-commerce Full-Stack API
+
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-API-green)
 ![React](https://img.shields.io/badge/React-Frontend-blue)
@@ -9,15 +10,18 @@
 ![System demo](assets/demo/ecommerce-demo.gif)
 
 **Full-stack e-commerce system built with Python, FastAPI, PostgreSQL, and React.**
-Includes authentication, product management, cart, checkout flow, stock control, automated tests, and CI/CD.
+
+Includes authentication, product management, shopping cart, checkout flow, stock control, order history, automated tests, CI/CD, and Docker support.
+
+🚀 **Live production deployment:** Frontend and backend deployed on Render with PostgreSQL.
 
 ---
 
 ## 🌐 Live Demo
 
-* 🔗 Frontend: [https://e-commerce-api-beta-eight.vercel.app](https://e-commerce-api-beta-eight.vercel.app)
-* 🔗 Backend API: [https://ecommerce-api-z4q0.onrender.com](https://ecommerce-api-z4q0.onrender.com)
-* 📄 Swagger Docs: [https://ecommerce-api-z4q0.onrender.com/docs](https://ecommerce-api-z4q0.onrender.com/docs)
+* 🔗 **Frontend:** https://ecommerce-frontend-b0mj.onrender.com
+* 🔗 **Backend API:** https://ecommerce-api-z4q0.onrender.com
+* 📄 **Swagger Docs:** https://ecommerce-api-z4q0.onrender.com/docs
 
 ---
 
@@ -42,38 +46,39 @@ Includes authentication, product management, cart, checkout flow, stock control,
 * Implemented **JWT authentication and role-based access**
 * Built a complete **e-commerce flow (cart → checkout → orders)**
 * Integrated frontend with backend using **React + Vite**
-* Set up **Docker + CI/CD pipeline**
-* Structured a scalable project using clean architecture principles
+* Configured **Docker + Docker Compose**
+* Set up **CI/CD with GitHub Actions**
+* Deployed the application using **Render**
+* Structured the project using clean architecture principles
 
 ---
 
 ## 🏗️ Tech Stack
 
-**Backend**
+### Backend
 
-* Python
+* Python 3.11
 * FastAPI
 * SQLAlchemy
 * Pydantic
 * Passlib / JWT
 
-**Frontend**
+### Frontend
 
 * React
 * Vite
 
-**Database**
+### Database
 
 * PostgreSQL
 
-**Testing & DevOps**
+### Testing & DevOps
 
 * Pytest
 * HTTPX
 * Docker / Docker Compose
 * GitHub Actions
-* Render (backend)
-* Vercel (frontend)
+* Render (frontend + backend + PostgreSQL)
 
 ---
 
@@ -89,164 +94,155 @@ frontend/
 tests/
 assets/demo/
 scripts/demo/
-```
+🔌 API Overview
+Auth
+POST /api/v1/auth/register
+POST /api/v1/auth/login
+GET /api/v1/auth/me
+Products
+GET /api/v1/products
+GET /api/v1/products/{id}
+POST /api/v1/products (admin)
+PUT /api/v1/products/{id} (admin)
+DELETE /api/v1/products/{id} (admin)
+Cart
+GET /api/v1/cart
+POST /api/v1/cart/items
+PUT /api/v1/cart/items/{product_id}
+DELETE /api/v1/cart/items/{product_id}
+Orders
+POST /api/v1/orders/checkout
+GET /api/v1/orders/mine
+GET /api/v1/orders/{id}
+GET /api/v1/orders (admin)
+📌 Business Rules
+Initial admin bootstrap strategy for development/demo purposes
+Only admins can manage products
+Products require a unique SKU
+Checkout fails if stock is insufficient
+Successful checkout:
+creates an order
+reduces product stock
+🐳 Running with Docker
 
----
+The project is fully containerized and can be started locally using Docker Compose.
 
-## 🔌 API Overview
+docker compose up --build
 
-### Auth
+After the containers start, open:
 
-* `POST /api/v1/auth/register`
-* `POST /api/v1/auth/login`
-* `GET /api/v1/auth/me`
+Frontend: http://localhost:5173
+Backend: http://localhost:8000
+Swagger: http://localhost:8000/docs
 
-### Products
+The Docker Compose setup includes:
 
-* `GET /api/v1/products`
-* `GET /api/v1/products/{id}`
-* `POST /api/v1/products` (admin)
-* `PUT /api/v1/products/{id}` (admin)
-* `DELETE /api/v1/products/{id}` (admin)
-
-### Cart
-
-* `GET /api/v1/cart`
-* `POST /api/v1/cart/items`
-* `PUT /api/v1/cart/items/{product_id}`
-* `DELETE /api/v1/cart/items/{product_id}`
-
-### Orders
-
-* `POST /api/v1/orders/checkout`
-* `GET /api/v1/orders/mine`
-* `GET /api/v1/orders/{id}`
-* `GET /api/v1/orders` (admin)
-
----
-
-## 📌 Business Rules
-
-* Initial admin bootstrap strategy for development/demo purposes
-* Only admins can manage products
-* Products require a unique **SKU**
-* Checkout fails if stock is insufficient
-* Successful checkout:
-
-  * creates an order
-  * reduces product stock
-
----
-
-## 🧪 Running Locally
-
-### Backend
-
-```bash
+FastAPI backend
+PostgreSQL database
+React/Vite frontend
+💻 Running Locally Without Docker
+Backend
 pip install -r requirements.txt
 cp .env.example .env
-docker compose up --build
-```
+uvicorn app.main:app --reload
 
 Open:
 
-* [http://localhost:8000](http://localhost:8000)
-* [http://localhost:8000/docs](http://localhost:8000/docs)
-
----
-
-### Frontend
-
-```bash
+http://localhost:8000
+http://localhost:8000/docs
+Frontend
 cd frontend
 cp .env.example .env
 npm install
 npm run dev
-```
 
 Open:
 
-* [http://localhost:5173](http://localhost:5173)
+http://localhost:5173
+✅ Testing
 
----
+Run the automated test suite with:
 
-## ✅ Testing
-
-```bash
 pytest
-```
 
 Coverage includes:
 
-* auth flow
-* checkout logic
-* stock validation
+authentication flow
+checkout logic
+stock validation
+🚀 Deployment
+Backend — Render
+FastAPI deployed using Docker
+PostgreSQL hosted on Render
+Environment variables configured through Render
+Production API:
+https://ecommerce-api-z4q0.onrender.com
+Frontend — Render
+React + Vite deployed using Docker
+Production frontend communicates with the FastAPI backend
+Production API configured through:
+VITE_API_BASE_URL=https://ecommerce-api-z4q0.onrender.com
+Production URLs
+Frontend: https://ecommerce-frontend-b0mj.onrender.com
+Backend: https://ecommerce-api-z4q0.onrender.com
+Swagger: https://ecommerce-api-z4q0.onrender.com/docs
+⚙️ Environment Variables
+Backend
 
----
+Example:
 
-## 🚀 Deployment
-
-### Backend (Render)
-
-* Uses `render.yaml` blueprint
-* Includes PostgreSQL provisioning
-
-### Frontend (Vercel)
-
-```env
-VITE_API_BASE_URL=https://your-backend.onrender.com
-```
-
----
-
-## ⚙️ Environment Variables
-
-Backend example:
-
-```env
 SECRET_KEY=your-secret
 DATABASE_URL=postgresql://...
 BACKEND_CORS_ORIGINS=["*"]
-```
+Frontend
 
-Frontend:
+Local development example:
 
-```env
 VITE_API_BASE_URL=http://localhost:8000
-```
 
----
+Production:
 
-## 🎯 Demo Flow
+VITE_API_BASE_URL=https://ecommerce-api-z4q0.onrender.com
 
-1. Register first user (admin)
-2. Create products
-3. Register a normal user
-4. Add items to cart
-5. Checkout
-6. View orders
+Production secrets and database credentials are configured through Render environment variables and are not committed to the repository.
 
----
+🎯 Demo Flow
+Register the first user (admin)
+Log in
+Create products through the admin area
+Register or use a normal user
+Add products to the shopping cart
+Complete checkout
+View order history
+Administrators can view platform orders and manage products
+🔮 Future Improvements
+Pagination & filtering
+Product images
+Alembic migrations
+Payment integration
+Admin analytics dashboard
+More test coverage
+📌 Production Verification
 
-## 🔮 Future Improvements
+The deployed application was tested end-to-end in the production environment.
 
-* Pagination & filtering
-* Product images
-* Alembic migrations
-* Payment integration
-* Admin analytics dashboard
-* More test coverage
+Verified functionality includes:
 
----
+Frontend loading successfully on Render
+Frontend-to-backend communication
+PostgreSQL persistence
+User authentication
+Administrator access
+Product creation and catalog display
+Stock control
+Shopping cart
+Checkout
+Order creation and order history
+Administrative order listing
+License
 
-## License
+This project is licensed under the MIT License.
 
-This project is licensed under the [MIT License](LICENSE).
+👨‍💻 Author
 
----
-
-## 👨‍💻 Author
-
-Developed by **@faellim**
-
----
+Developed by @faellim
